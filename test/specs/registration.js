@@ -19,9 +19,6 @@ describe("Demo",  function() {
 
 
 
-
-
-
     after(function() {
         // runs after all tests in this file
         browser.closeWindow()
