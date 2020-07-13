@@ -34,6 +34,12 @@ Page.prototype.CompanyNameGenerator = function(){
     return randomValue
 }
 
+Page.prototype.DepartmentNameGenerator = function(){
+    const values = Object.values(access.department)
+    const randomValue = values[parseInt(Math.random() * values.length)]
+    return randomValue
+}
+
 Page.prototype.EmployeeNameGenerator = function(){
 
     const values = Object.values(access.employeeName)

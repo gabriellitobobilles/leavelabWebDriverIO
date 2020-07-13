@@ -14,6 +14,7 @@ describe("Demo",  function() {
     it("User Login using User Account",  function(){
         this.timeout(300000); // 5 minutes
         RocksPage.AccountLogin(access.GmailAccount.Email, access.GmailAccount.Password);
+        RocksPage.createDepartment();
     });
 
     xit("User Login using Google Account",  function(){

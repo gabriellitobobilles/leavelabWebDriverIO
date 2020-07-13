@@ -29,8 +29,16 @@ var LoginPage = Object.create(Page,{
     createBtn: { get: function () { return browser.$(`[id="submit_registration"]`); } },
     leaveRequestBtn: { get: function () { return browser.$(`[id="book_time_off_btn"]`); } },
     blockoutDateBtn: { get: function () { return browser.$(`[class="btn btn-white btn-lg blackout-btn"]`); } },
+    saveBtn: { get: function () { return browser.$(`[class="btn btn-green"]`); } },
+    compMenuSettings: { get: function () { return browser.$$(`[id="settings_menu"]`)[0]; } },
+    userMenuSettings: { get: function () { return browser.$$(`[id="settings_menu"]`)[1]; } },
+    departmentLinkText: { get: function () { return browser.$(`a=Departments`); } },
+    addDepartmentBtn: { get: function () { return browser.$(`[id="add_new_department_btn"]`); } },
+    departmentNameTxtbox: { get: function () { return browser.$(`[id="department_name_new"]`); } },
+    deleteDepartment: { get: function () { return browser.$(`[data-target="#delete_department_modal"]`); } },
+    messageSuccess: { get: function () { return browser.$(`.alert-success`); } },
     
-    
+
     
     
    
@@ -75,6 +83,26 @@ var LoginPage = Object.create(Page,{
         this.ENTER;
         this.leaveRequestBtn.waitForDisplayed({ timeout: 270000 });
         assert.strictEqual(this.leaveRequestBtn.isExisting(), true)
+        
+    }},
+
+    createDepartment: { value: function(){
+        
+        browser.pause(2000);
+        this.compMenuSettings.moveTo();
+        this.departmentLinkText.click();
+        browser.pause(2000);
+        assert.strictEqual(this.addDepartmentBtn.isExisting(), true)
+        this.addDepartmentBtn.click();
+        this.departmentNameTxtbox.waitForDisplayed({ timeout: 270000 });
+        assert.strictEqual(this.departmentNameTxtbox.isExisting(), true)
+        this.departmentNameTxtbox.click()
+        this.departmentNameTxtbox.setValue(Page.DepartmentNameGenerator())
+        console.log(this.departmentNameTxtbox.getValue())
+        this.saveBtn.click()
+        this.messageSuccess.waitForDisplayed({ timeout: 270000 });
+        assert.strictEqual(this.messageSuccess.getText(), "Changes to departments were saved");
+       
     }},
 
     
